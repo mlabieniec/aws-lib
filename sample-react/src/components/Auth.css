@@ -1,0 +1,22 @@
+.AuthContainer {
+    margin: 0 auto;
+    margin-top: 1em;
+    max-width: 350px;
+    width: 350px;
+    padding: 1em;
+}
+
+.AuthContainer input {
+    margin-top: 1em;
+}
+
+input {
+    width: 80%;
+    padding: 0.75em;
+}
+
+button {
+    margin: 0.5em;
+    width: 87%;
+    padding: 0.75em;
+}

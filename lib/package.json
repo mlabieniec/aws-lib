@@ -1,0 +1,22 @@
+{
+  "name": "aws-lib",
+  "version": "1.0.0",
+  "description": "A simple, tiny browser application library for passwordless authentication, authorization, and a serverless API on AWS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@aws-crypto/sha256-js": "^2.0.2",
+    "@aws-sdk/client-cognito-identity": "^3.238.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.238.0",
+    "@aws-sdk/signature-v4": "^3.226.0",
+    "axios": "^1.2.1"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "localstorage-slim": "^2.3.0"
+  }
+}
