@@ -1,8 +1,7 @@
 import { 
   App,
   Stack, 
-  StackProps, 
-  NestedStackProps, 
+  StackProps,
   NestedStack,
   CfnOutput,
 } from 'aws-cdk-lib';
@@ -55,12 +54,6 @@ export class CoreStack extends Stack {
     });
   }
 }
-
-/*
-interface nestedStackProps extends NestedStackProps {
-  readonly guid: string;
-}
-*/
 
 class AuthStack extends NestedStack {
   auth: Auth;
