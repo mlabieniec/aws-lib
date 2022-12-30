@@ -20,5 +20,12 @@
   "peerDependencies": {
     "aws-cdk-lib": "2.56.1",
     "constructs": "^10.0.0"
-  }
+  },
+  "description": "A serverless express API",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
 }

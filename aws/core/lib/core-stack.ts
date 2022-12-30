@@ -21,14 +21,17 @@ export class CoreStack extends Stack {
     const authStack = new AuthStack(this, `authStack-${guid}`);
     const apiStack = new ApiStack(this,`apiStack-${guid}`);
 
-    // Add Execute permissions to the authenticated role 
+    // Add Execute permissions if you want to use this API as an authenticated/guest API
+    // Rather than with Express views. Otherwise, if using with Express/SSR views, the API
+    // needs to be without authentication.
+    /*
     const apiArn = apiStack.api.gateway.arnForExecuteApi();
-    authStack.auth.identityPool.authenticatedRole.addToPrincipalPolicy(new PolicyStatement({
+    authStack.auth.identityPool.unauthenticatedRole.addToPrincipalPolicy(new PolicyStatement({
       effect: Effect.ALLOW,
       actions: ['execute-api:*'],
       resources: [apiArn]
     }));
-
+    */
     new CfnOutput(this, 'id', {
       value: guid
     });

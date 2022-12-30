@@ -5,8 +5,8 @@ info:
 paths:
   /:
     x-amazon-apigateway-any-method:
-      security:
-      - sigv4: []
+      #security:
+      #- sigv4: []
       responses:
         200:
           description: Default response for CORS method
