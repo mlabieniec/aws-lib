@@ -1,6 +1,9 @@
 import './Auth.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Auth, API } from 'aws-lib';
+import { Auth, API, Config } from 'aws-lib';
+
+const config = new Config();
+config.encryption(true, 'my-app-key');
 
 const auth = new Auth();
 const api = new API(auth);
@@ -60,6 +63,19 @@ function AuthView(props) {
                     <div className='AuthUsername'>
                         <input type="text" ref={usernameRef} placeholder="Phone Number"></input>
                         <button onClick={() => setUsername(usernameRef.current.value)}>Login or Signup</button>
+                    </div>
+                    <div id="g_id_onload"
+                        data-client_id={config.exports.google}
+                        data-login_uri="http://localhost:3000"
+                        data-auto_prompt="true">
+                    </div>
+                    <div className="g_id_signin"
+                        data-type="standard"
+                        data-size="large"
+                        data-theme="filled_black"
+                        data-text="sign_in_with"
+                        data-shape="pill"
+                        data-logo_alignment="center">
                     </div>
                 </div>
             }

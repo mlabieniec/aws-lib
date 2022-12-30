@@ -1,10 +1,18 @@
 import { Construct } from 'constructs';
-import { AccountRecovery, Mfa, UserPool, UserPoolClient, VerificationEmailStyle } from 'aws-cdk-lib/aws-cognito';
-import { IdentityPool, UserPoolAuthenticationProvider } from '@aws-cdk/aws-cognito-identitypool-alpha';
+import { 
+  AccountRecovery, 
+  Mfa, 
+  UserPool, 
+  UserPoolClient, 
+  VerificationEmailStyle } from 'aws-cdk-lib/aws-cognito';
+import { 
+  IdentityPool, 
+  UserPoolAuthenticationProvider } from '@aws-cdk/aws-cognito-identitypool-alpha';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import path = require('path');
 import { RemovalPolicy } from 'aws-cdk-lib';
 import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import * as Config from './config.json';
 
 export interface AuthProps {}
 
@@ -13,6 +21,7 @@ export class Auth extends Construct {
   userPool: UserPool;
   userPoolClient: UserPoolClient;
   identityPool: IdentityPool;
+  idps:any = Config.IdentityPoolAuthenticationProviders;
 
   constructor(scope: Construct, id: string, props: AuthProps = {}) {
     super(scope, id);
@@ -92,15 +101,26 @@ export class Auth extends Construct {
       },
     });
 
+    let authProviders:any = {
+      userPools: [
+        new UserPoolAuthenticationProvider({
+          userPool: this.userPool,
+          userPoolClient: this.userPoolClient
+        })
+      ]
+    };
+
+    let idps:any = Config.IdentityPoolAuthenticationProviders;
+    for (let key in idps) {
+      if (key) {
+        authProviders[key] = idps[key];
+      }
+    }
+
     this.identityPool = new IdentityPool(this, `authz-identitypool`, {
       identityPoolName: id,
       allowUnauthenticatedIdentities: true,
-      authenticationProviders: {
-        userPools: [new UserPoolAuthenticationProvider({
-          userPool: this.userPool,
-          userPoolClient: this.userPoolClient
-        })],
-      },
+      authenticationProviders: authProviders,
     });
   }
 }

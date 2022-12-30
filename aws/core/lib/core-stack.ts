@@ -44,6 +44,15 @@ export class CoreStack extends Stack {
     new CfnOutput(this, 'cognitoIdentityPoolID', {
       value: authStack.auth.identityPool.identityPoolId
     });
+    
+    for(let idp in authStack.auth.idps) {
+      if (idp) {
+        let key = Object.keys(authStack.auth.idps[idp])[0];
+        new CfnOutput(this, idp, {
+          value: authStack.auth.idps[idp][key]
+        });
+      }
+    }
 
     new CfnOutput(this, 'cognitoUserpoolID', {
       value: authStack.auth.userPool.userPoolId
