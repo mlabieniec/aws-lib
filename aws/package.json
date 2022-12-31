@@ -3,7 +3,8 @@
   "workspaces": [
     "api",
     "core",
-    "auth"
+    "auth",
+    "data"
   ],
   "version": "1.0.0",
   "description": "",
