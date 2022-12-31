@@ -8,6 +8,10 @@ config.encryption(true, 'my-app-key');
 const auth = new Auth();
 const api = new API(auth);
 
+window.googleCallback = function(data) {
+    auth.initProvider(auth.AUTH_PROVIDERS.google, data.credential);
+}
+
 function AuthView(props) {
 
     const usernameRef = useRef('');
@@ -66,8 +70,8 @@ function AuthView(props) {
                     </div>
                     <div id="g_id_onload"
                         data-client_id={config.exports.google}
-                        data-login_uri="http://localhost:3000"
-                        data-auto_prompt="true">
+                        data-callback="googleCallback"
+                        data-auto_prompt="false">
                     </div>
                     <div className="g_id_signin"
                         data-type="standard"

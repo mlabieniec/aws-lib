@@ -19,20 +19,16 @@ export class CoreStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, 'AppStack', props);
 
-    const authStack = new AuthStack(this, `authStack-${guid}`);
-    const apiStack = new ApiStack(this,`apiStack-${guid}`);
-    const dataStack = new DataStack(this, `dataStack-${guid}`);
-    // Add Execute permissions if you want to use this API as an authenticated/guest API
-    // Rather than with Express views. Otherwise, if using with Express/SSR views, the API
-    // needs to be without authentication e.g. comment out this entire block.
-    
-    const apiArn = apiStack.api.gateway.arnForExecuteApi();
-    authStack.auth.identityPool.unauthenticatedRole.addToPrincipalPolicy(new PolicyStatement({
+    const authStack = new AuthStack(this, 'authStack');
+    const apiStack = new ApiStack(this, 'apiStack');
+    const dataStack = new DataStack(this, 'dataStack');
+
+    authStack.auth.identityPool.authenticatedRole.addToPrincipalPolicy(new PolicyStatement({
       effect: Effect.ALLOW,
       actions: [
         'execute-api:*'
       ],
-      resources: [apiArn]
+      resources: [apiStack.api.gateway.arnForExecuteApi()]
     }));
 
     authStack.auth.identityPool.authenticatedRole.addToPrincipalPolicy(new PolicyStatement({
@@ -51,26 +47,56 @@ export class CoreStack extends Stack {
       resources: ['*']
     }));
 
-    /**
-     * Add permissions to the Lambda function to access the DynamoDB table. These should include
-     * CRUD operations
-     */
-    apiStack.api.apiFn.role?.attachInlinePolicy(new Policy(this, 'apiFunctionPolicy', {
+    // API Function is able to Read from the users table and CRUD on the data table
+    apiStack.api.apiFn.role?.attachInlinePolicy(new Policy(this, 'apiFunctionPolicyUserRead', {
       statements: [new PolicyStatement({
         actions: [
-          'dynamodb:Attributes',
-          'dynamodb:LeadingKeys',
-          'dynamodb:ReturnConsumedCapacity',
-          'dynamodb:Select',
-          'dynamodb:ReturnValues',
-          'dynamodb:EnclosingOperation'
+          "dynamodb:BatchGetItem",
+          "dynamodb:Describe*",
+          "dynamodb:List*",
+          "dynamodb:GetItem",
+          "dynamodb:Query",
+          "dynamodb:Scan",
         ],
         resources: [
-          dataStack.data.dbUser.tableArn,
+          dataStack.data.dbUser.tableArn
+        ],
+      })],
+    }));
+    apiStack.api.apiFn.role?.attachInlinePolicy(new Policy(this, 'apiFunctionPolicyDataRW', {
+      statements: [new PolicyStatement({
+        actions: [
+          "dynamodb:GetItem",
+          "dynamodb:BatchGetItem",
+          "dynamodb:BatchWriteItem",
+          "dynamodb:PutItem",
+          "dynamodb:Scan",
+          "dynamodb:UpdateItem",
+          "dynamodb:GetRecords",
+          "dynamodb:DeleteItem",
+          "dynamodb:Query"
+        ],
+        resources: [
           dataStack.data.dbData.tableArn
         ],
       })],
     }));
+
+    // AuthFn can PUT on the Users table
+    apiStack.api.apiFn.role?.attachInlinePolicy(new Policy(this, 'authFunctionPolicyDataW', {
+      statements: [new PolicyStatement({
+        actions: [
+          "dynamodb:PutItem"
+        ],
+        resources: [
+          dataStack.data.dbUser.tableArn
+        ],
+      })],
+    }));
+
+    apiStack.api.authFn.addEnvironment(
+      'DB_USER_TABLE', dataStack.data.dbUser.tableName
+    );
 
     apiStack.api.apiFn.addEnvironment(
       'DB_USER_TABLE',dataStack.data.dbUser.tableName
@@ -78,6 +104,13 @@ export class CoreStack extends Stack {
 
     apiStack.api.apiFn.addEnvironment(
       'DB_DATA_TABLE',dataStack.data.dbData.tableName
+    );
+    apiStack.api.authFn.addEnvironment(
+      'REGION', this.region
+    );
+
+    apiStack.api.apiFn.addEnvironment(
+      'REGION', this.region
     );
 
     new CfnOutput(this, 'id', {
@@ -108,9 +141,13 @@ export class CoreStack extends Stack {
     new CfnOutput(this, 'cognitoUserpoolID', {
       value: authStack.auth.userPool.userPoolId
     });
+    
+    new CfnOutput(this, 'data', {
+      value: apiStack.api.gateway.deploymentStage.urlForPath('/data')
+    });
 
-    new CfnOutput(this, 'api', {
-      value: apiStack.api.gateway.deploymentStage.urlForPath()
+    new CfnOutput(this, 'auth', {
+      value: apiStack.api.gateway.deploymentStage.urlForPath('/auth')
     });
   }
 }
