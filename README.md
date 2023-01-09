@@ -2,6 +2,25 @@
 
 A complete (tiny) solution for passwordless authentication and serverless APIs on AWS, backed by customizable CDK constructs and Open API definition.
 
+## Setup
+This project uses the AWS CDK, so ensure that is installed/configured for your AWS account first. The only configuration currently needed is adding a `config.json` file to `aws/auth/lib/config.json` with your external IDPs. The configuration of this file should match the required data that the CDK needs to instantiate 3rd party IDPs. For example:
+
+```json
+{
+    "IdentityPoolAuthenticationProviders": {
+        "google": {
+            "clientId": "your-client-id.apps.googleusercontent.com"
+        },
+        "facebook: ...
+    }
+}
+
+```
+
+The structure of this JSON directly maps to the CDK API and can be included as such:
+https://docs.aws.amazon.com/cdk/api/v2/docs/@aws-cdk_aws-cognito-identitypool-alpha.UserPoolAuthenticationProvider.html
+
+
 ## Usage
 
 1. Build/deploy the CDK app (ensure you have the CDK and credentials setup on your machine)
