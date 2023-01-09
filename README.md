@@ -11,7 +11,7 @@ This project uses the AWS CDK, so ensure that is installed/configured for your A
         "google": {
             "clientId": "your-client-id.apps.googleusercontent.com"
         },
-        "facebook: ...
+        "facebook: {}
     }
 }
 
