@@ -2,6 +2,22 @@
 
 A simple library for passwordless (Custom Auth) authentication (Cognito User and Identity Pools) and a serverless API (API Gateway+Lambda) using Open API schema. Configuration is generated via the `../aws` CDK application and contains resources used by this lib.
 
+## Usage
+This module can be included as a dependency of another via `import`. Just link locally (see ../sample-react). To build/bundle:
+
+```bash
+npm i && npm run build
+npm link
+```
+
+Then in your project run:
+
+```bash
+npm link aws-lib
+```
+
+Keep in mind the cloudformation outputs from `../aws` CDK project will be outputed to `./config.json` and included in the build/dist file for you. So if you change the backend, you'll need to run the above again.
+
 ## Features
 
 * Simple custom/**passwordless** Authentication
