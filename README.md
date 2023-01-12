@@ -31,8 +31,13 @@ cd aws && npm i && npm run deploy
 ```
 cd ../sample-react && npm i && npm start
 ```
-3. Edit/Customize/Repeat
 
+You might need to link the `lib/` into the `sample-react` app, especially if you are on windows. If you get a bunch of dependency errors when running the sample, then run the following:
+
+```bash
+cd lib && npm link
+cd ../sample-react && npm link aws-lib
+```
 
 ## Features
 
@@ -44,7 +49,7 @@ cd ../sample-react && npm i && npm start
 * Encrypted localstorage for saved state/login
 * Tiny Size: Uncompressed **10.8 kB**, Minified **5.09 kB**, Gzipped **2.12 kB**, Brotlied **1.86 kB**
 
-## Sample Lib Usage
+## Sample Client Lib Usage
 ```
 import { Auth, API } from 'aws-lib';
 
