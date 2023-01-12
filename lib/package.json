@@ -2,11 +2,12 @@
   "name": "aws-lib",
   "version": "1.0.0",
   "description": "A simple, tiny browser application library for passwordless authentication, authorization, and a serverless API on AWS.",
-  "main": "dist.js",
+  "main": "dist.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup index.js --file dist.js --format umd --name \"awsLib\" -p json"
+    "build": "rollup -c"
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -15,6 +16,7 @@
     "@aws-sdk/client-cognito-identity-provider": "^3.238.0",
     "@aws-sdk/signature-v4": "^3.226.0",
     "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-terser": "^0.3.0",
     "axios": "^1.2.1",
     "rollup": "^3.10.0"
   },
