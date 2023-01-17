@@ -27,7 +27,10 @@ export class API extends Construct {
     this.apiFn = new lambda.Function(this, 'LambdaData', {
       // if a functionName is specified it will be a static value
       // in the console. See note below on this as it can cause problems
-      // and conflicts when re-deploying with the CDK
+      // and conflicts when re-deploying with the CDK. However if you are
+      // using the Open API definition you will need to hard code a name here
+      // just ensure it's deleted before re-deploying (via the console or CLI)
+      // and that it matches the name within the api.yaml file
       //functionName: 'OpenAPILambdaApiFunction',
       runtime: lambda.Runtime.NODEJS_14_X,
       handler: 'index.handler',

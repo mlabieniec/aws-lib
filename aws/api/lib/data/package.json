@@ -9,7 +9,8 @@
         "compression": "^1.7.4",
         "cors": "^2.8.5",
         "ejs": "^3.1.8",
-        "express": "^4.18.2"
+        "express": "^4.18.2",
+        "source-map-support": "^0.5.19"
     },
     "description": "A serverless express API",
     "author": "",

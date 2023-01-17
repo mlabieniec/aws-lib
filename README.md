@@ -17,14 +17,16 @@ This project uses the AWS CDK, so ensure that is installed/configured for your A
 
 ```
 
-The structure of this JSON directly maps to the CDK API and can be included as such:
-https://docs.aws.amazon.com/cdk/api/v2/docs/@aws-cdk_aws-cognito-identitypool-alpha.UserPoolAuthenticationProvider.html
+The structure of this JSON directly maps to the CDKs `IdentityPoolAuthenticationProviders` API and can be included as such per provider:
+https://docs.aws.amazon.com/cdk/api/v2/docs/@aws-cdk_aws-cognito-identitypool-alpha.IdentityPoolAuthenticationProviders.html
 
+*If you don't plan on using providers, just create an empty JSON file in `aws/auth/lib/config.json`
 
 ## Usage
 
-1. Build/deploy the CDK app (ensure you have the CDK and credentials setup on your machine)
+1. Build/deploy the CDK app (ensure you have the CDK and credentials setup on your machine).
 ```
+# ensure you have created a aws/auth/lib/config.json file as outlined above (if no providers, just leave it blank {})
 cd aws && npm i && npm run deploy
 ```
 2. Build and Run the React sample
@@ -33,6 +35,7 @@ cd ../sample-react && npm i && npm start
 ```
 3. Edit/Customize/Repeat
 
+* The front-end library uses a configuration file that is outputed via the CDK. It's a `config.json` file and contains cloudformation outputs that the front-end library will consume. The location of the config file is hard coded to resolve to the `lib` by default. If you move things around, ensure you are outputing that `config.json` file to the library directory.
 
 ## Features
 

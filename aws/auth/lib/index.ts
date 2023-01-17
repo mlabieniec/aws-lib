@@ -110,12 +110,15 @@ export class Auth extends Construct {
       ]
     };
 
-    let idps:any = Config.IdentityPoolAuthenticationProviders;
-    for (let key in idps) {
-      if (key) {
-        authProviders[key] = idps[key];
+    // Check for external identity providers configuration
+    try {
+      let idps:any = Config.IdentityPoolAuthenticationProviders;
+      for (let key in idps) {
+        if (key) {
+          authProviders[key] = idps[key];
+        }
       }
-    }
+    } catch (error) {} 
 
     this.identityPool = new IdentityPool(this, `authz-identitypool`, {
       identityPoolName: id,

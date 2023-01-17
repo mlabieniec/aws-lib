@@ -8,6 +8,10 @@ config.encryption(true, 'my-app-key');
 const auth = new Auth();
 const api = new API(auth);
 
+// this is used by the google API for retrieving the auth token. This coorelatese to the 
+// HTML block's `data-callback="googleCallback"` attribute. Without this, the google api
+// would POST back to the page. This could be another option utilizing the included ability
+// to render Express views via the API library portion (See `aws/api/`)
 window.googleCallback = function(data) {
     auth.initProvider(auth.AUTH_PROVIDERS.google, data.credential);
 }
