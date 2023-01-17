@@ -33,9 +33,14 @@ cd aws && npm i && npm run deploy
 ```
 cd ../sample-react && npm i && npm start
 ```
-3. Edit/Customize/Repeat
+
+You might need to link the `lib/` into the `sample-react` app, especially if you are on windows. If you get a bunch of dependency errors when running the sample, then run the following:
 
 * The front-end library uses a configuration file that is outputed via the CDK. It's a `config.json` file and contains cloudformation outputs that the front-end library will consume. The location of the config file is hard coded to resolve to the `lib` by default. If you move things around, ensure you are outputing that `config.json` file to the library directory.
+```bash
+cd lib && npm link
+cd ../sample-react && npm link aws-lib
+```
 
 ## Features
 
@@ -47,7 +52,7 @@ cd ../sample-react && npm i && npm start
 * Encrypted localstorage for saved state/login
 * Tiny Size: Uncompressed **10.8 kB**, Minified **5.09 kB**, Gzipped **2.12 kB**, Brotlied **1.86 kB**
 
-## Sample Lib Usage
+## Sample Client Lib Usage
 ```
 import { Auth, API } from 'aws-lib';
 
