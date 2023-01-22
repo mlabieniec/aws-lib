@@ -16,6 +16,13 @@ Then in your project run:
 npm link aws-lib
 ```
 
+While working on the lib run within the `lib` directory:
+```bash
+npm start
+# or run `npm run build` to just output the dist files for usage
+```
+This will run a rollup watch command and refresh and changes and re-build the lib. Generally you can leave this running in a separate console so that any lib changes get refreshed within the sample app.
+
 Keep in mind the cloudformation outputs from `../aws` CDK project will be outputed to `./config.json` and included in the build/dist file for you. So if you change the backend, you'll need to run the above again.
 
 ## Features
