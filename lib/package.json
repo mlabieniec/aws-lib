@@ -5,10 +5,9 @@
   "main": "dist.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c",
-    "start": "rollup -c -w"
+    "build": "rollup -c --bundleConfigAsCjs",
+    "start": "rollup -c -w --bundleConfigAsCjs"
   },
-  "type": "module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -18,7 +17,7 @@
     "@aws-sdk/signature-v4": "^3.226.0",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-terser": "^0.3.0",
-    "axios": "^1.2.1",
+    "axios": "^1.2.3",
     "rollup": "^3.10.0"
   },
   "dependencies": {
