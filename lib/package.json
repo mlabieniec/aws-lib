@@ -2,7 +2,7 @@
   "name": "aws-lib",
   "version": "1.0.0",
   "description": "A simple, tiny browser application library for passwordless authentication, authorization, and a serverless API on AWS.",
-  "main": "dist.min.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c --bundleConfigAsCjs",
