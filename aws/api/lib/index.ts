@@ -36,7 +36,7 @@ export class API extends Construct {
       handler: 'index.handler',
       memorySize: 512,
       timeout: Duration.seconds(30),
-      logRetention: RetentionDays.ONE_DAY,
+      //logRetention: RetentionDays.ONE_DAY,
       code: lambda.Code.fromAsset(path.join(__dirname, 'data/')),
     });
 
@@ -53,7 +53,7 @@ export class API extends Construct {
       handler: 'index.handler',
       memorySize: 512,
       timeout: Duration.seconds(30),
-      logRetention: RetentionDays.ONE_DAY,
+      //logRetention: RetentionDays.ONE_DAY,
       code: lambda.Code.fromAsset(path.join(__dirname, 'auth/')),
     });
 
