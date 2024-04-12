@@ -35,13 +35,14 @@ https://docs.aws.amazon.com/cdk/api/v2/docs/@aws-cdk_aws-cognito-identitypool-al
 
 ## Usage
 
-1. Build/deploy the CDK app (ensure you have the CDK and credentials setup on your machine). Ensure you have created a `aws/auth/lib/config.json` file as outlined above (if no providers, just leave it blank with an empty object `{}`)
+1. Build/deploy the CDK app (ensure you have the CDK and credentials setup on your machine). Ensure you have created a `aws/auth/lib/config.json` file as outlined above (if no providers, just leave it blank with an empty object `{}`). Note: This will likely take a while!
 
 ```bash
 cd aws && npm i && npm run deploy
 ```
 
 > NOTE: If you are using an AWS CLI profile, the NPM script doesn't include the `--profile` argument. So, if you have profiles enabled, run the deploy directly from `cd aws/core`: `cdk deploy --outputs-file ../../lib/config.json --yourProfileName`
+
 
 2. Build and Run the React sample
 ```bash

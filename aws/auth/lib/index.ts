@@ -27,25 +27,25 @@ export class Auth extends Construct {
     super(scope, id);
 
     const preSignupFn = new lambda.Function(this, `lambdaTriggerPreSignUp`, {
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'presignup.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, 'triggers/')),
     });
 
     const createAuthChallengeFn = new lambda.Function(this, `lambdaTriggerCreateAuthChallenge`, {
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'createauthchallenge.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, 'triggers/')),
     });
 
     const defineAuthChallengeFn = new lambda.Function(this, `lambdaTriggerDefineAuthChallenge`, {
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'defineauthchallenge.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, 'triggers/')),
     });
 
     const verifyAuthChallengeResponseFn = new lambda.Function(this, `lambdaTriggerVerifyAuthChallengeResponse`, {
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'verifyauthchallengeresponse.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, 'triggers/')),
     });
