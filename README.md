@@ -33,8 +33,6 @@ This project uses the AWS CDK, so ensure that is installed/configured for your A
 The structure of this JSON directly maps to the CDKs `IdentityPoolAuthenticationProviders` API and can be included as such per provider:
 https://docs.aws.amazon.com/cdk/api/v2/docs/@aws-cdk_aws-cognito-identitypool-alpha.IdentityPoolAuthenticationProviders.html
 
-*If you don't plan on using providers, just create an empty JSON file in `aws/auth/lib/config.json`
-
 ## Usage
 
 1. Build/deploy the CDK app (ensure you have the CDK and credentials setup on your machine). Ensure you have created a `aws/auth/lib/config.json` file as outlined above (if no providers, just leave it blank with an empty object `{}`)
