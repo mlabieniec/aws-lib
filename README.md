@@ -24,7 +24,7 @@ This project uses the AWS CDK, so ensure that is installed/configured for your A
         "google": {
             "clientId": "your-client-id.apps.googleusercontent.com"
         },
-        "facebook": {}
+        "facebook": {} // Don't include these as empty or the CDK stack will throw errors
     }
 }
 
@@ -40,6 +40,8 @@ https://docs.aws.amazon.com/cdk/api/v2/docs/@aws-cdk_aws-cognito-identitypool-al
 ```bash
 cd aws && npm i && npm run deploy
 ```
+
+> NOTE: If you are using an AWS CLI profile, the NPM script doesn't include the `--profile` argument. So, if you have profiles enabled, run the deploy directly from `cd aws/core`: `cdk deploy --outputs-file ../../lib/config.json --yourProfileName`
 
 2. Build and Run the React sample
 ```bash

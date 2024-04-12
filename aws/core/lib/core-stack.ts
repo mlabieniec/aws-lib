@@ -11,6 +11,7 @@ import { Chance } from 'chance';
 import { Auth } from '../../auth/lib';
 import { API } from '../../api/lib';
 import { Data } from '../../data/lib';
+import 'dotenv/config'
 
 const c = new Chance();
 const guid = c.guid();
@@ -178,4 +179,9 @@ class DataStack extends NestedStack {
   }
 }
 
-new CoreStack(new App(), guid);
+new CoreStack(new App(), guid, {
+  env: { 
+    account: process.env.CDK_DEFAULT_ACCOUNT, 
+    region: process.env.CDK_DEFAULT_REGION 
+  }
+});

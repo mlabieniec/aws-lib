@@ -1,1 +1,7 @@
-{}
+{
+    "IdentityPoolAuthenticationProviders": {
+        "google": {
+            "clientId": "GOOGLE_ID=677953287897-2brf5vfk5tbs9t7a607tuiu8mjqavaej.apps.googleusercontent.com"
+        }
+    }
+}

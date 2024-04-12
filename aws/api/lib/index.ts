@@ -32,7 +32,7 @@ export class API extends Construct {
       // just ensure it's deleted before re-deploying (via the console or CLI)
       // and that it matches the name within the api.yaml file
       //functionName: 'OpenAPILambdaApiFunction',
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
       memorySize: 512,
       timeout: Duration.seconds(30),
@@ -49,7 +49,7 @@ export class API extends Construct {
      * third party authentication providers like google
      */
     this.authFn = new lambda.Function(this, 'LambdaAuth', {
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
       memorySize: 512,
       timeout: Duration.seconds(30),
