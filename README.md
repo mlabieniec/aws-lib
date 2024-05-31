@@ -62,6 +62,8 @@ cd lib && npm link
 cd ../sample-react && npm link aws-lib
 ```
 
+> Once deployed, you can download the generated API SDK from the AWS console with the `getsdk.sh` script. Fill in the API ID, and path you want the zip downloaded to. This would be done anytime you update the stack, then download a new generated SDK. This SDK can be used directly within your app, without the `lib`.
+
 * The front-end library uses a configuration file that is outputed via the CDK. It's a `config.json` file and contains cloudformation outputs that the front-end library will consume in order to call AWS. The location of the config file is hard coded to resolve to the `lib` by default e.g. `"aws-lib: file:lib"` within the `sample-react/package.json` file. So, if you move things around, ensure you are outputing that `config.json` file to `lib/config.json` (you can do this by modifying the `aws/core/package.json`'s `deploy` script).
 
 ## Features
